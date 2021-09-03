@@ -1,7 +1,7 @@
 import Account from "../models/Account";
 import AccountOperation from "../models/operations/AccountOperation";
 import Transaction from "../models/operations/Transaction";
-import AccountDto, { toAccountDto } from "./operations/AccountDto";
+import AccountDto, { toAccountDto } from "./AccountDto";
 import AccountOperationDto, { toAccountOperationDto } from "./operations/AccountOperationDto";
 import TransferDto, { toTransferDto } from "./operations/TransferDto";
 

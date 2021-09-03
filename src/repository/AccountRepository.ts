@@ -5,18 +5,18 @@ export namespace AccountRepository {
     var accountsMap = new Map<string, Account>();
 
     export function saveAccount(account: Account): void {
-        if (getAccount(account.id)) {
-            accountsMap.set(account.id, account);
+        if (!getAccount(account.customerDocument)) {
+            accountsMap.set(account.customerDocument, account);
         } else {
-            console.error('Account already exists', account.id);
+            console.error('Account already exists', account.customerDocument);
         }
     }
 
     export function updateAccount(account: Account): void {
-        if (getAccount(account.id)) {
+        if (getAccount(account.customerDocument)) {
             accountsMap.set(account.id, account);
         } else {
-            console.error('Account not exists', account.id);
+            console.error('Account not exists', account.customerDocument);
         }
     }
 

@@ -1,9 +1,10 @@
+import Operation from "models/enums/Operation";
 import AccountOperation from "../../models/operations/AccountOperation";
 import BaseDto from "../BaseDto";
 
 class AccountOperationDto extends BaseDto{
-    document: string;
-    amount: number;
+    document?: string;
+    amount?: number;
 
     constructor(document: string, amount: number, type: Operation) {
         super(type);

@@ -5,7 +5,7 @@ import Operation from "models/enums/Operation";
 
 
 class TransferDto extends BaseDto{
-    transaction: TransactionDto;
+    transaction?: TransactionDto;
 
     constructor(transaction: TransactionDto, type: Operation) {
         super(type);

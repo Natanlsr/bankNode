@@ -1,9 +1,9 @@
 import Operation from "models/enums/Operation";
 
 class BaseDto{
-    type: Operation
+    type: String
 
-    constructor(type: Operation){
+    constructor(type: String){
         this.type = type
     }
 }

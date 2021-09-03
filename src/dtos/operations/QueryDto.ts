@@ -2,7 +2,7 @@ import Operation from "models/enums/Operation";
 import BaseDto from "../BaseDto";
 
 class QueryDto extends BaseDto{
-    document: string;
+    document?: string;
 
     constructor(document: string, type: Operation){
         super(type);

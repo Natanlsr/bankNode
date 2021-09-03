@@ -8,23 +8,23 @@ import Command from "../Command";
 class DepositCommand implements Command {
 
     execute(command: AccountOperationDto): AccountDetailsDto {
-        const account = AccountRepository.getAccount(command.document);
+        const account = AccountRepository.getAccount(command.document!!);
 
         if(!account){
             console.error('Account not exists', command.document);
             throw Error;
         }
 
-        if(command.amount > 0){
+        if(command.amount!! <= 0){
            console.error('Deposit not supported');
            throw Error; 
         }
 
-        account.balance += command.amount;
+        account.balance += command.amount!!;
         const operation = {
-            accountId: command.document,
+            accountId: command.document!!,
             operation: command.type,
-            amount: command.amount,
+            amount: command.amount!!,
             date: new Date()
         }
         AccountRepository.updateAccount(account);
