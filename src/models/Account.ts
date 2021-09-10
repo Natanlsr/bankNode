@@ -1,19 +1,22 @@
 import AccountStatus from "./enums/AccountStatus";
 
-class Account{
+class Account implements BaseDocument{
     id: string;
-    customerDocument: string;
+    document: string;
+    type: string;
     balance: number;
-    status: AccountStatus;
-    creationDate: Date;
+    status: string;
+    creationDate: string;
 
-    constructor(id: string, customerDocument: string, balance: number, status: AccountStatus, creationDate: Date){
+    constructor(id: string, customerDocument: string, balance: number, status: AccountStatus, creationDate: string, type: string){
         this.id = id;
-        this.customerDocument = customerDocument;
+        this.document = customerDocument;
+        this.type = type;
         this.balance = balance;
         this.status = status;
         this.creationDate = creationDate;
     }
+   
 
 }
 

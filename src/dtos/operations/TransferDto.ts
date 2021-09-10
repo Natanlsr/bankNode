@@ -1,19 +1,19 @@
 import BaseDto from "../BaseDto";
 import TransactionDto from "./TransactionDto";
-import Transaction from "../../models/operations/Transaction";
 import Operation from "models/enums/Operation";
+import AccountOperation from "models/operations/AccountOperation";
 
 
 class TransferDto extends BaseDto{
     transaction?: TransactionDto;
 
-    constructor(transaction: TransactionDto, type: Operation) {
-        super(type);
+    constructor(transaction: TransactionDto, type: Operation, tenant: string) {
+        super(type, tenant);
         this.transaction = transaction;
     }
 }
 
-export function toTransferDto(transfer: Transaction): TransferDto{
+export function toTransferDto(transfer: AccountOperation): TransferDto{
     return {
         transaction: {
             id: transfer.id,
@@ -21,7 +21,8 @@ export function toTransferDto(transfer: Transaction): TransferDto{
             receiver: transfer.receiver,
             amount: transfer.amount
         },
-        type: Operation.TRANSFER
+        type: Operation.TRANSFER,
+        tenant: null
     }
 }
 

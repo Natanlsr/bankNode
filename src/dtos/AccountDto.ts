@@ -1,23 +1,27 @@
-import BaseDto from "dtos/BaseDto";
-import Operation from "models/enums/Operation";
-import Account from "../models/Account";
+import Account from "models/Account";
+import AccountStatus from "models/enums/AccountStatus";
 
-class AccountDto extends BaseDto{
-    document?: string;
-    balance?: number;
+class AccountDto{
+    document: string;
+    balance: number;
+    status: string;
+    creationDate: string;
 
-    constructor(document: string, balance: number, type: Operation) {
-        super(type);
+    constructor(document: string, balance: number, status: AccountStatus, creationDate: string){
         this.document = document;
         this.balance = balance;
+        this.status = status;
+        this.creationDate = creationDate;
     }
 }
 
-export function toAccountDto(accountOperation: Account): AccountDto{
+export function toAccountDto(account: Account): AccountDto{
     return {
-        document: accountOperation.customerDocument,
-        balance: accountOperation.balance,
-        type: Operation.CREATE_ACCOUNT
+        document: account.document,
+        balance: account.balance,
+        status: account.status,
+        creationDate: account.creationDate
     }
 }
+
 export default AccountDto;

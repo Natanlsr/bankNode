@@ -1,36 +1,27 @@
 
 import AccountDetailsDto, { toAccountDetailsDto } from "../../dtos/AccountDetailsDto";
 import AccountOperationDto from "../../dtos/operations/AccountOperationDto";
-import { AccountRepository } from "../../repository/AccountRepository";
-import { OperationRepository } from "../../repository/OperationRepository";
+import AccountRepository from "repository/AccountRepository";
 import Command from "../Command";
+import AccountOperationReceiver from "./AccountOperationReceiver";
 
 class DepositCommand implements Command {
 
-    execute(command: AccountOperationDto): AccountDetailsDto {
-        const account = AccountRepository.getAccount(command.document!!);
-
+    async execute(command: AccountOperationDto): Promise<AccountDetailsDto> {
+        const account = await AccountRepository.getAccount(command.document!!, command.tenant!!);
+        
         if(!account){
-            console.error('Account not exists', command.document);
-            throw Error;
+            throw Error('Account not exists');
         }
 
-        if(command.amount!! <= 0){
+        if(command.amount!! <= 0){ 
            console.error('Deposit not supported');
-           throw Error; 
+           throw Error('Amount Invalid'); 
         }
 
-        account.balance += command.amount!!;
-        const operation = {
-            accountId: command.document!!,
-            operation: command.type,
-            amount: command.amount!!,
-            date: new Date()
-        }
-        AccountRepository.updateAccount(account);
-        OperationRepository.saveOperation(operation)
+        const result = await AccountOperationReceiver.execute(command, account);
 
-        return toAccountDetailsDto(account,[operation]);
+        return result;
     }
     
 }

@@ -1,37 +1,27 @@
 
-import AccountDetailsDto, { toAccountDetailsDto } from "../../dtos/AccountDetailsDto";
+import AccountDetailsDto from "../../dtos/AccountDetailsDto";
 import AccountOperationDto from "../../dtos/operations/AccountOperationDto";
-import { AccountRepository } from "../../repository/AccountRepository";
-import { OperationRepository } from "../../repository/OperationRepository";
+import AccountRepository from "repository/AccountRepository";
 import Command from "../Command";
+import AccountOperationReceiver from "./AccountOperationReceiver";
 
 class WithdrawCommand implements Command {
 
-    execute(command: AccountOperationDto): AccountDetailsDto {
-        const account = AccountRepository.getAccount(command.document!!);
+    async execute(command: AccountOperationDto): Promise<AccountDetailsDto> {
+        const account = await AccountRepository.getAccount(command.document!!, command.tenant!!);
 
         if(!account){
-            console.error('Account not exists', command.document);
             throw Error;
         }
 
         if(command.amount!! <= 0 || account.balance <= 0 || account.balance < command.amount!!){
-           console.error('Withdraw not supported');
            throw Error; 
         }
 
-        account.balance -= command.amount!!;
-        const operation = {
-            accountId: command.document!!,
-            operation: command.type,
-            amount: command.amount!!,
-            date: new Date()
-        }
+        command.amount = -Math.abs(command.amount!!);
+        const result = await AccountOperationReceiver.execute(command, account);
 
-        AccountRepository.updateAccount(account);
-        OperationRepository.saveOperation(operation)
-
-        return toAccountDetailsDto(account, [operation]);
+        return result;
     }
     
 }

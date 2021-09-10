@@ -1,59 +1,41 @@
 
 import TransferDto from "dtos/operations/TransferDto";
-import AccountDetailsDto, { toAccountDetailsDto } from "../../dtos/AccountDetailsDto";
-import { AccountRepository } from "../../repository/AccountRepository";
-import { TransactionRepository } from "repository/TransactionRepository";
+import AccountDetailsDto from "../../dtos/AccountDetailsDto";
 import Command from "../Command";
 import WithdrawCommand from "./WithdrawCommand";
 import Operation from "models/enums/Operation";
 import DepositCommand from "./DepositCommand";
-import Transaction from "models/operations/Transaction";
 
 class TransferCommand implements Command {
 
-    execute(command: TransferDto): AccountDetailsDto {
+    async execute(command: TransferDto): Promise<AccountDetailsDto> {
 
-        if(!command.transaction ){
-            console.error('Command Invalid');
-            throw Error;
+        if(!command.transaction || !command.transaction.receiver || !command.transaction.payer){
+            throw Error('Command invalid');
         }
 
-        const accountPayer = AccountRepository.getAccount(command.transaction.payer);
-        const accountReceiver = AccountRepository.getAccount(command.transaction.receiver);
-
-        if(!accountPayer || !accountReceiver){
-            console.log("Account Not Found");
-            throw Error;
-        }
-
-        WithdrawCommand.execute(
+        const accountPayer = await WithdrawCommand.execute(
             {
-                document: accountPayer?.customerDocument,
-                amount: command.transaction!!.amount!!,
-                type: Operation.WITHDRAW.toString()
+                document: command.transaction.payer,
+                amount: command.transaction.amount,
+                type: Operation.TRANSFER.toString(),
+                receiver: command.transaction.receiver,
+                payer: '',
+                tenant: command.tenant
             }
         )
 
-        DepositCommand.execute(
+        await DepositCommand.execute(
             {
-                document: accountReceiver?.customerDocument,
-                amount: command.transaction!!.amount!!,
-                type: Operation.DEPOSIT.toString()
+                document: command.transaction.receiver,
+                amount: command.transaction.amount,
+                type: Operation.TRANSFER.toString(),
+                payer: command.transaction.payer,
+                receiver: '',
+                tenant: command.tenant
             }
         )
-
-        const transaction: Transaction = {
-            id: command.transaction.id,
-            payer: command.transaction.payer,
-            receiver: command.transaction.receiver,
-            amount: command.transaction.amount,
-            operationDate: new Date()
-        }
-
-        TransactionRepository.saveTransaction(command.transaction.payer, transaction);
-        TransactionRepository.saveTransaction(command.transaction.receiver, transaction);
-
-        return toAccountDetailsDto(accountPayer);
+        return accountPayer;
     }
     
 }

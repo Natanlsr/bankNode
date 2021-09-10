@@ -1,5 +1,8 @@
+import { DynamoDbConfig } from 'config/DynamoDbConfig';
 import CommandInvoker from '../handle/CommandInvoker';
 
-const commandInvoker = new CommandInvoker()
+async function handler(){
+    await new CommandInvoker().executeCommands();
+};
 
-commandInvoker.executeCommands();
+handler();
