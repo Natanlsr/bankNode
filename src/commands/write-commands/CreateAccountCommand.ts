@@ -1,5 +1,5 @@
-import CreateAccountDto from 'dtos/operations/CreateAccountDto';
-import AccountRepository from 'repository/AccountRepository';
+import CreateAccountDto from '../../dtos/operations/CreateAccountDto';
+import AccountRepository from '../../repository/AccountRepository';
 import { v4 as uuidv4 } from 'uuid';
 import AccountDetailsDto, { toAccountDetailsDto } from '../../dtos/AccountDetailsDto';
 import Account from "../../models/Account";

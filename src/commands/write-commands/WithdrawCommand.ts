@@ -1,9 +1,9 @@
 
 import AccountDetailsDto from "../../dtos/AccountDetailsDto";
 import AccountOperationDto from "../../dtos/operations/AccountOperationDto";
-import AccountRepository from "repository/AccountRepository";
+import AccountRepository from "../../repository/AccountRepository";
 import Command from "../Command";
-import AccountOperationReceiver from "./AccountOperationReceiver";
+import AccountOperationReceiver from "../write-commands/AccountOperationReceiver";
 
 class WithdrawCommand implements Command {
 
@@ -15,7 +15,7 @@ class WithdrawCommand implements Command {
         }
 
         if(command.amount!! <= 0 || account.balance <= 0 || account.balance < command.amount!!){
-           throw Error; 
+           throw Error(`Amount Invalid: ${command.amount}`); 
         }
 
         command.amount = -Math.abs(command.amount!!);

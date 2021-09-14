@@ -6,5 +6,8 @@ module.exports = {
   coveragePathIgnorePatterns: [
     "src/models",
     "src/dtos"
-  ]
+  ],
+  modulePathIgnorePatterns: [
+    "<rootDir>/.aws-sam"
+  ],
 };

@@ -3,13 +3,13 @@ import {
     QueryCommand,
     QueryCommandInput,
 } from '@aws-sdk/client-dynamodb';
-import { DynamoDbConfig } from 'config/DynamoDbConfig';
-import TABLE_NAME from 'utils/TableNameUtil';
+import { DynamoDbConfig } from '../config/DynamoDbConfig';
+import TABLE_NAME from '../utils/TableNameUtil';
 import Account from '../models/Account';
 import { marshall, unmarshall } from '@aws-sdk/util-dynamodb';
-import { KeysFormatterUtils } from 'utils/KeysFormatterUtils';
-import AccountOperation from 'models/operations/AccountOperation';
-import AccountDetails from 'models/AccountDetails';
+import { KeysFormatterUtils } from '../utils/KeysFormatterUtils';
+import AccountOperation from '../models/operations/AccountOperation';
+import AccountDetails from '../models/AccountDetails';
 
 class AccountRepository {
     private dynamoClient = DynamoDbConfig.getDynamoClient();

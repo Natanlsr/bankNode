@@ -1,9 +1,9 @@
 
-import AccountDetailsDto, { toAccountDetailsDto } from "../../dtos/AccountDetailsDto";
+import AccountDetailsDto from "../../dtos/AccountDetailsDto";
 import AccountOperationDto from "../../dtos/operations/AccountOperationDto";
-import AccountRepository from "repository/AccountRepository";
+import AccountRepository from "../../repository/AccountRepository";
 import Command from "../Command";
-import AccountOperationReceiver from "./AccountOperationReceiver";
+import AccountOperationReceiver from "../write-commands/AccountOperationReceiver";
 
 class DepositCommand implements Command {
 
@@ -15,8 +15,7 @@ class DepositCommand implements Command {
         }
 
         if(command.amount!! <= 0){ 
-           console.error('Deposit not supported');
-           throw Error('Amount Invalid'); 
+           throw Error(`Amount Invalid: ${command.amount}`); 
         }
 
         const result = await AccountOperationReceiver.execute(command, account);

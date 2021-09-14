@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "test": "jest --no-cache --coverage",
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/server.ts"
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/server.ts",
+    "build": "node_modules/typescript/bin/tsc"
   },
   "lint": "eslint . --ext .ts",
   "lint-fix": "eslint . --ext .ts --fix",
@@ -12,8 +13,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@aws-sdk/client-dynamodb": "^3.29.0",
-    "@aws-sdk/util-dynamodb": "^3.29.0",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.10",
     "@types/uuid": "^8.3.1",
@@ -31,6 +30,10 @@
     "typescript": "^4.4.2"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.31.0",
+    "@aws-sdk/util-dynamodb": "^3.31.0",
+    "@types/aws-lambda": "^8.10.83",
+    "source-map-support": "^0.5.20",
     "uuid": "^8.3.2"
   }
 }

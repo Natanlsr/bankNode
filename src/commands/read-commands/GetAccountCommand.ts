@@ -1,6 +1,6 @@
-import QueryDto from 'dtos/operations/QueryDto';
+import QueryDto from '../../dtos/operations/QueryDto';
 import AccountDetailsDto, { toAccountDetailsDto } from '../../dtos/AccountDetailsDto';
-import AccountRepository from "repository/AccountRepository";
+import AccountRepository from "../../repository/AccountRepository";
 import Command from "../Command";
 
 class GetAccountCommand implements Command {

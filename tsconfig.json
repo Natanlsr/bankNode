@@ -1,7 +1,17 @@
 {
     "exclude": ["node_modules"],
-    "include": ["src"],
+    "include": ["src/**/*.ts", "src/**/*.js"],
+    // "compilerOptions": {
+    //     "sourceMap": true,
+    //     "module": "commonjs",
+    //     "moduleResolution": "node",
+    //     "lib": ["es2020"],
+    //     "target": "es2020",
+    //     "outDir": "./dist",
+    //     "rootDir": "./src"
+    //   },
     "compilerOptions": {
+        "moduleResolution": "node",
         "target": "es5" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
         "lib": [
             "es6"
@@ -10,7 +20,7 @@
         "resolveJsonModule": true /* Enable importing .json files */,
 
         "allowJs": true /* Allow JavaScript files to be a part of your program. Use the `checkJS` option to get errors from these files. */,
-        "outDir": "build" /* Specify an output folder for all emitted files. */,
+        "outDir": "./dist" /* Specify an output folder for all emitted files. */,
         "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */,
         // "preserveSymlinks": true,                         /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */
         "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
@@ -18,6 +28,7 @@
         "strict": true /* Enable all strict type-checking options. */,
         "noImplicitAny": true /* Enable error reporting for expressions and declarations with an implied `any` type.. */ /* Skip type checking .d.ts files that are included with TypeScript. */,
         "skipLibCheck": true /* Skip type checking all .d.ts files. */,
-        "baseUrl": "src"
+        "baseUrl": "src",
+        "rootDir": "./src"
     }
 }

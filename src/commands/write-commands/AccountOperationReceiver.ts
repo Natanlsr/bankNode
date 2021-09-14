@@ -1,11 +1,10 @@
 
-import AccountOperation from "models/operations/AccountOperation";
+import AccountOperation from "../../models/operations/AccountOperation";
 import { v4 as uuidv4 } from 'uuid';
-import AccountRepository from "repository/AccountRepository";
+import AccountRepository from "../../repository/AccountRepository";
 import AccountDetailsDto, { toAccountDetailsDto } from "../../dtos/AccountDetailsDto";
 import AccountOperationDto from "../../dtos/operations/AccountOperationDto";
-import Command from "../Command";
-import Account from "models/Account";
+import Account from "../../models/Account";
 
 class AccountOperationReceiver{
 

@@ -1,17 +1,17 @@
 
-import TransferDto from "dtos/operations/TransferDto";
+import TransferDto from "../../dtos/operations/TransferDto";
 import AccountDetailsDto from "../../dtos/AccountDetailsDto";
 import Command from "../Command";
-import WithdrawCommand from "./WithdrawCommand";
-import Operation from "models/enums/Operation";
-import DepositCommand from "./DepositCommand";
+import WithdrawCommand from "../write-commands/WithdrawCommand";
+import Operation from "../../models/enums/Operation";
+import DepositCommand from "../write-commands/DepositCommand";
 
 class TransferCommand implements Command {
 
     async execute(command: TransferDto): Promise<AccountDetailsDto> {
 
         if(!command.transaction || !command.transaction.receiver || !command.transaction.payer){
-            throw Error('Command invalid');
+            throw Error('Transfer Command invalid');
         }
 
         const accountPayer = await WithdrawCommand.execute(
