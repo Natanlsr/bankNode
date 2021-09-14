@@ -97,7 +97,7 @@ class AccountRepository {
         const operationsFinded: Array<AccountOperation> = [];
         var accountFinded: Account;
 
-        if (!result.Items) {
+        if (!result.Items || result.Items.length == 0) {
             throw Error('Account information not found');
         }
 
