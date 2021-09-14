@@ -19,11 +19,11 @@ Dillinger uses a number of open source projects to work properly:
 - [SAM](https://aws.amazon.com/pt/serverless/sam/)
 - [DynamoDb](https://aws.amazon.com/pt/dynamodb/)
 
-## Installation
+## Running
 
 Node Bank requires [Node.js](https://nodejs.org/) v14+ to run.
 
-To run local:
+To run local with SAM:
 
 ```sh
 npm install
@@ -31,8 +31,14 @@ sam build
 sam local start-api
 ```
 
-Debugging Application: 
+Debugging Application with SAM: 
 
 ```sh
 sam local start-api --template template.yml --debug-port=5858
+```
+
+Run Local Without SAM: 
+
+```sh
+npm run dev
 ```
