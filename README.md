@@ -1,5 +1,6 @@
 # Bank Node
 ##  Project Serveless in Typescript
+Project with the objective of simulating a bank
 
 ## Features
 
