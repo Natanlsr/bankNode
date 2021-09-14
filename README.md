@@ -23,8 +23,7 @@ Dillinger uses a number of open source projects to work properly:
 
 Node Bank requires [Node.js](https://nodejs.org/) v14+ to run.
 
-First up the docker with the dynamo 
-To run local with SAM:
+First up the docker with the dynamo:
 
 ```sh
 docker-compose up
