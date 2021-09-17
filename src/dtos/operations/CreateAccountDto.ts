@@ -1,6 +1,5 @@
-import BaseDto from "dtos/BaseDto";
-import Operation from "models/enums/Operation";
-import Account from "../../models/Account";
+import Operation from "../../models/enums/Operation";
+import BaseDto from "../BaseDto";
 
 class CreateAccountDto extends BaseDto{
     document?: string;

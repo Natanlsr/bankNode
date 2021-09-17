@@ -1,4 +1,4 @@
-import Operation from "models/enums/Operation";
+import Operation from "../models/enums/Operation";
 
 class BaseDto{
     type: string;

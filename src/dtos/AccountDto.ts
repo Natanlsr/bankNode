@@ -1,5 +1,5 @@
-import Account from "models/Account";
-import AccountStatus from "models/enums/AccountStatus";
+import Account from "../models/Account";
+import AccountStatus from "../models/enums/AccountStatus";
 
 class AccountDto{
     document: string;

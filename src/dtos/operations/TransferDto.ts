@@ -1,7 +1,7 @@
 import BaseDto from "../BaseDto";
 import TransactionDto from "./TransactionDto";
-import Operation from "models/enums/Operation";
-import AccountOperation from "models/operations/AccountOperation";
+import Operation from "../../models/enums/Operation";
+import AccountOperation from "../../models/operations/AccountOperation";
 
 
 class TransferDto extends BaseDto{

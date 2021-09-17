@@ -14,8 +14,6 @@ export const depositCommandHandler = async (
     if (event.httpMethod !== 'POST') {
         throw new Error(`postMethod only accepts POST method, you tried: ${event.httpMethod} method.`);
     }
-
-    console.log(event.body);
     
     if(!event.body){
         throw Error("Body is required");
@@ -25,6 +23,8 @@ export const depositCommandHandler = async (
         throw Error("Tenant is required");
     }
 
+    console.log(JSON.parse(event.body));
+    
     const depositCommand = JSON.parse(event.body) as AccountOperationDto;
     depositCommand.tenant = event.headers.Tenant;
     depositCommand.type = Operation.DEPOSIT;

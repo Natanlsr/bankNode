@@ -1,4 +1,4 @@
-import Operation from "models/enums/Operation";
+import Operation from "../../models/enums/Operation";
 import BaseDto from "../BaseDto";
 
 class QueryDto extends BaseDto{
